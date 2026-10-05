@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <title>Feliz Aniversário 🎂</title>
 
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="confetti"></div>
+
+  <main class="container">
+
+    <!-- TELA INICIAL -->
+    <section id="startScreen" class="screen active">
+      <div class="gift">🎁</div>
+
+      <h1>Tenho uma surpresa pra você...</h1>
+
+      <p class="subtitle">
+        Só precisa apertar o botão.
+      </p>
+
+      <button id="startButton">
+        Abrir surpresa ✨
+      </button>
+    </section>
+
+
+    <!-- TELA DA ANIMAÇÃO -->
+    <section id="cakeScreen" class="screen">
+
+      <p id="loadingText" class="loading-text">
+        Preparando uma coisinha especial...
+      </p>
+
+      <div class="cake-area">
+
+        <!-- PARTES QUE CAEM -->
+        <div id="cakeTop" class="cake-piece cake-top">
+          <div class="icing"></div>
+        </div>
+
+        <div id="cakeMiddle" class="cake-piece cake-middle">
+          <div class="icing"></div>
+        </div>
+
+        <div id="cakeBottom" class="cake-piece cake-bottom">
+          <div class="plate"></div>
+        </div>
+
+        <!-- VELA -->
+        <div id="candle" class="candle">
+          <div class="flame"></div>
+        </div>
+
+      </div>
+
+      <div id="birthdayMessage" class="birthday-message">
+
+        <div class="stars">✦ ✧ ✦</div>
+
+        <h2>Feliz aniversário! 🎉</h2>
+
+        <p>
+          Que seu dia seja muito especial,
+          cheio de coisas boas, alegria,
+          risadas e momentos inesquecíveis. ❤️
+        </p>
+
+        <p>
+          Espero que você aproveite muito seu dia
+          e que essa nova fase seja incrível!
+        </p>
+
+        <div class="final-emoji">
+          🎂 ✨ 🎉
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
