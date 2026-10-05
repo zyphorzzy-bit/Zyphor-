@@ -1,1 +1,718 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 30%, #252525 0%, #101010 38%, #050505 100%);
+
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+
+  overflow-x: hidden;
+}
+
+.container {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+}
+
+.screen {
+  width: 100%;
+  max-width: 600px;
+  min-height: 90vh;
+
+  display: none;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.screen.active {
+  display: flex;
+}
+
+
+/* =========================
+   TELA INICIAL
+========================= */
+
+.gift {
+  font-size: 90px;
+
+  animation:
+    giftFloat 2s ease-in-out infinite,
+    giftAppear 1s ease;
+}
+
+@keyframes giftFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes giftAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+h1 {
+  margin-top: 25px;
+
+  font-size: clamp(28px, 7vw, 46px);
+  line-height: 1.1;
+
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  margin-top: 15px;
+
+  color: #bdbdbd;
+
+  font-size: 16px;
+}
+
+button {
+  margin-top: 35px;
+
+  padding: 16px 28px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: white;
+  color: #080808;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 30px rgba(255,255,255,0.12);
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 35px rgba(255,255,255,0.2);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+
+/* =========================
+   BOLO
+========================= */
+
+.loading-text {
+  position: absolute;
+
+  top: 12%;
+
+  color: #aaa;
+
+  font-size: 14px;
+
+  animation: textPulse 1.5s infinite;
+}
+
+@keyframes textPulse {
+  0%, 100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.cake-area {
+  position: relative;
+
+  width: 300px;
+  height: 310px;
+
+  margin-top: 60px;
+}
+
+
+/* PRATO */
+
+.plate {
+  position: absolute;
+
+  bottom: -15px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 270px;
+  height: 25px;
+
+  border-radius: 50%;
+
+  background: #dcdcdc;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.5);
+}
+
+
+/* PARTES DO BOLO */
+
+.cake-piece {
+  position: absolute;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 230px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f3c79c,
+      #d99b6b
+    );
+
+  box-shadow:
+    inset 0 -8px 0 rgba(0,0,0,0.08),
+    0 12px 30px rgba(0,0,0,0.35);
+}
+
+
+/* PARTE DE BAIXO */
+
+.cake-bottom {
+  height: 75px;
+
+  bottom: 20px;
+
+  transform:
+    translateX(-50%)
+    translateY(-500px);
+
+  opacity: 0;
+}
+
+
+/* PARTE DO MEIO */
+
+.cake-middle {
+  height: 70px;
+
+  bottom: 92px;
+
+  transform:
+    translateX(-50%)
+    translateY(-500px);
+
+  opacity: 0;
+}
+
+
+/* TOPO */
+
+.cake-top {
+  height: 62px;
+
+  bottom: 160px;
+
+  transform:
+    translateX(-50%)
+    translateY(-500px);
+
+  opacity: 0;
+}
+
+
+/* COBERTURA */
+
+.icing {
+  position: absolute;
+
+  left: -2px;
+  top: -8px;
+
+  width: calc(100% + 4px);
+  height: 25px;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  box-shadow:
+    0 5px 10px rgba(0,0,0,0.1);
+}
+
+
+/* QUANDO O BOLO CAI */
+
+.cake-area.assemble .cake-bottom {
+  animation:
+    cakeBottomDrop 1s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.cake-area.assemble .cake-middle {
+  animation:
+    cakeMiddleDrop 1s 0.45s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.cake-area.assemble .cake-top {
+  animation:
+    cakeTopDrop 1s 0.9s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+
+@keyframes cakeBottomDrop {
+
+  0% {
+    transform:
+      translateX(-50%)
+      translateY(-500px)
+      rotate(-8deg);
+
+    opacity: 0;
+  }
+
+  70% {
+    transform:
+      translateX(-50%)
+      translateY(15px)
+      rotate(3deg);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translateX(-50%)
+      translateY(0)
+      rotate(0);
+
+    opacity: 1;
+  }
+}
+
+
+@keyframes cakeMiddleDrop {
+
+  0% {
+    transform:
+      translateX(-50%)
+      translateY(-500px)
+      rotate(7deg);
+
+    opacity: 0;
+  }
+
+  70% {
+    transform:
+      translateX(-50%)
+      translateY(-10px)
+      rotate(-2deg);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translateX(-50%)
+      translateY(0)
+      rotate(0);
+
+    opacity: 1;
+  }
+}
+
+
+@keyframes cakeTopDrop {
+
+  0% {
+    transform:
+      translateX(-50%)
+      translateY(-500px)
+      rotate(-6deg);
+
+    opacity: 0;
+  }
+
+  70% {
+    transform:
+      translateX(-50%)
+      translateY(8px)
+      rotate(2deg);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translateX(-50%)
+      translateY(0)
+      rotate(0);
+
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   VELA
+========================= */
+
+.candle {
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 222px;
+
+  width: 22px;
+  height: 65px;
+
+  transform:
+    translateX(-50%)
+    scaleY(0);
+
+  transform-origin: bottom;
+
+  opacity: 0;
+
+  border-radius: 5px;
+
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #ffffff 0px,
+      #ffffff 7px,
+      #dcdcdc 7px,
+      #dcdcdc 12px
+    );
+}
+
+.candle.show {
+  animation: candleAppear 0.7s forwards;
+}
+
+@keyframes candleAppear {
+
+  0% {
+    transform:
+      translateX(-50%)
+      scaleY(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform:
+      translateX(-50%)
+      scaleY(1);
+    opacity: 1;
+  }
+}
+
+
+/* CHAMA */
+
+.flame {
+  position: absolute;
+
+  top: -35px;
+  left: 50%;
+
+  width: 22px;
+  height: 35px;
+
+  transform:
+    translateX(-50%)
+    scale(0);
+
+  transform-origin: bottom;
+
+  opacity: 0;
+
+  border-radius:
+    50% 50% 50% 50% /
+    65% 65% 35% 35%;
+
+  background:
+    radial-gradient(
+      circle at 50% 70%,
+      white 0 15%,
+      #ffe36e 30%,
+      #ff9d00 65%,
+      #ff4500 100%
+    );
+
+  filter:
+    drop-shadow(0 0 10px #ff9d00);
+}
+
+.flame.lit {
+  animation:
+    flameAppear 0.5s forwards,
+    flameMove 0.18s 0.5s infinite alternate ease-in-out;
+}
+
+@keyframes flameAppear {
+
+  from {
+    transform:
+      translateX(-50%)
+      scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform:
+      translateX(-50%)
+      scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flameMove {
+
+  from {
+    transform:
+      translateX(-50%)
+      scale(1)
+      rotate(-4deg);
+  }
+
+  to {
+    transform:
+      translateX(-50%)
+      scale(1.08)
+      rotate(4deg);
+  }
+}
+
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.birthday-message {
+  position: absolute;
+
+  left: 50%;
+  bottom: 5%;
+
+  width: min(90%, 550px);
+
+  transform:
+    translateX(-50%)
+    translateY(50px);
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+.birthday-message.show {
+  animation:
+    messageAppear 1.2s 0.5s forwards;
+}
+
+@keyframes messageAppear {
+
+  from {
+    opacity: 0;
+    transform:
+      translateX(-50%)
+      translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateX(-50%)
+      translateY(0);
+  }
+}
+
+.birthday-message h2 {
+  font-size: clamp(32px, 9vw, 54px);
+
+  line-height: 1;
+
+  margin-bottom: 20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff,
+      #ffd76a,
+      #ffffff
+    );
+
+  background-size: 200%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200%;
+  }
+}
+
+.birthday-message p {
+  margin: 12px auto;
+
+  max-width: 500px;
+
+  color: #d0d0d0;
+
+  font-size: 16px;
+
+  line-height: 1.6;
+}
+
+.stars {
+  margin-bottom: 15px;
+
+  color: #ffd76a;
+
+  font-size: 22px;
+
+  animation: starGlow 1.5s infinite alternate;
+}
+
+@keyframes starGlow {
+
+  from {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.final-emoji {
+  margin-top: 20px;
+
+  font-size: 32px;
+}
+
+
+/* =========================
+   CONFETES
+========================= */
+
+#confetti {
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  z-index: 50;
+}
+
+.confetti-piece {
+  position: absolute;
+
+  top: -20px;
+
+  width: 8px;
+  height: 14px;
+
+  opacity: 0.9;
+
+  animation:
+    confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+
+  0% {
+    transform:
+      translateY(-30px)
+      rotate(0deg);
+  }
+
+  100% {
+    transform:
+      translateY(110vh)
+      rotate(720deg);
+  }
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 500px) {
+
+  .container {
+    padding: 15px;
+  }
+
+  .cake-area {
+    transform: scale(0.9);
+  }
+
+  .birthday-message {
+    bottom: 3%;
+  }
+
+  .birthday-message p {
+    font-size: 15px;
+  }
+
+  .gift {
+    font-size: 75px;
+  }
+  }
